@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.AsmrMapper">
+  <resultMap id="BaseResultMap" type="com.qf.pojo.Asmr">
+    <id column="asmrid" jdbcType="INTEGER" property="asmrid" />
+    <result column="asmrname" jdbcType="VARCHAR" property="asmrname" />
+    <result column="asmrtime" jdbcType="VARCHAR" property="asmrtime" />
+    <result column="asmrtypeid" jdbcType="INTEGER" property="asmrtypeid" />
+    <result column="vipstate" jdbcType="INTEGER" property="vipstate" />
+    <result column="asmrurl" jdbcType="VARCHAR" property="asmrurl" />
+    <result column="asmrphoto" jdbcType="VARCHAR" property="asmrphoto" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    asmrid, asmrname, asmrtime, asmrtypeid, vipstate, asmrurl, asmrphoto
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from asmr
+    where asmrid = #{asmrid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from asmr
+    where asmrid = #{asmrid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qf.pojo.Asmr">
+    insert into asmr (asmrid, asmrname, asmrtime, 
+      asmrtypeid, vipstate, asmrurl, 
+      asmrphoto)
+    values (#{asmrid,jdbcType=INTEGER}, #{asmrname,jdbcType=VARCHAR}, #{asmrtime,jdbcType=VARCHAR}, 
+      #{asmrtypeid,jdbcType=INTEGER}, #{vipstate,jdbcType=INTEGER}, #{asmrurl,jdbcType=VARCHAR}, 
+      #{asmrphoto,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.pojo.Asmr">
+    insert into asmr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="asmrid != null">
+        asmrid,
+      </if>
+      <if test="asmrname != null">
+        asmrname,
+      </if>
+      <if test="asmrtime != null">
+        asmrtime,
+      </if>
+      <if test="asmrtypeid != null">
+        asmrtypeid,
+      </if>
+      <if test="vipstate != null">
+        vipstate,
+      </if>
+      <if test="asmrurl != null">
+        asmrurl,
+      </if>
+      <if test="asmrphoto != null">
+        asmrphoto,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="asmrid != null">
+        #{asmrid,jdbcType=INTEGER},
+      </if>
+      <if test="asmrname != null">
+        #{asmrname,jdbcType=VARCHAR},
+      </if>
+      <if test="asmrtime != null">
+        #{asmrtime,jdbcType=VARCHAR},
+      </if>
+      <if test="asmrtypeid != null">
+        #{asmrtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="vipstate != null">
+        #{vipstate,jdbcType=INTEGER},
+      </if>
+      <if test="asmrurl != null">
+        #{asmrurl,jdbcType=VARCHAR},
+      </if>
+      <if test="asmrphoto != null">
+        #{asmrphoto,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.pojo.Asmr">
+    update asmr
+    <set>
+      <if test="asmrname != null">
+        asmrname = #{asmrname,jdbcType=VARCHAR},
+      </if>
+      <if test="asmrtime != null">
+        asmrtime = #{asmrtime,jdbcType=VARCHAR},
+      </if>
+      <if test="asmrtypeid != null">
+        asmrtypeid = #{asmrtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="vipstate != null">
+        vipstate = #{vipstate,jdbcType=INTEGER},
+      </if>
+      <if test="asmrurl != null">
+        asmrurl = #{asmrurl,jdbcType=VARCHAR},
+      </if>
+      <if test="asmrphoto != null">
+        asmrphoto = #{asmrphoto,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where asmrid = #{asmrid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.pojo.Asmr">
+    update asmr
+    set asmrname = #{asmrname,jdbcType=VARCHAR},
+      asmrtime = #{asmrtime,jdbcType=VARCHAR},
+      asmrtypeid = #{asmrtypeid,jdbcType=INTEGER},
+      vipstate = #{vipstate,jdbcType=INTEGER},
+      asmrurl = #{asmrurl,jdbcType=VARCHAR},
+      asmrphoto = #{asmrphoto,jdbcType=VARCHAR}
+    where asmrid = #{asmrid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.qf.pojo.User">
+    <id column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="wecahat" jdbcType="VARCHAR" property="wecahat" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="conuttime" jdbcType="INTEGER" property="conuttime" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="vipstate" jdbcType="INTEGER" property="vipstate" />
+    <result column="viptime" jdbcType="VARCHAR" property="viptime" />
+    <result column="headurl" jdbcType="VARCHAR" property="headurl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    userid, phone, wecahat, username, conuttime, count, vipstate, viptime, headurl
+  </sql>
+
+  <select id="selectByWeChat" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where wecahat = #{wechat,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qf.pojo.User">
+    insert into user (userid, phone, wecahat, 
+      username, conuttime, count, 
+      vipstate, viptime, headurl
+      )
+    values (#{userid,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{wecahat,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{conuttime,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, 
+      #{vipstate,jdbcType=INTEGER}, #{viptime,jdbcType=VARCHAR}, #{headurl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="wecahat != null">
+        wecahat,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="conuttime != null">
+        conuttime,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="vipstate != null">
+        vipstate,
+      </if>
+      <if test="viptime != null">
+        viptime,
+      </if>
+      <if test="headurl != null">
+        headurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wecahat != null">
+        #{wecahat,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="conuttime != null">
+        #{conuttime,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="vipstate != null">
+        #{vipstate,jdbcType=INTEGER},
+      </if>
+      <if test="viptime != null">
+        #{viptime,jdbcType=VARCHAR},
+      </if>
+      <if test="headurl != null">
+        #{headurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.pojo.User">
+    update user
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wecahat != null">
+        wecahat = #{wecahat,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="conuttime != null">
+        conuttime = #{conuttime,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="vipstate != null">
+        vipstate = #{vipstate,jdbcType=INTEGER},
+      </if>
+      <if test="viptime != null">
+        viptime = #{viptime,jdbcType=VARCHAR},
+      </if>
+      <if test="headurl != null">
+        headurl = #{headurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.pojo.User">
+    update user
+    set phone = #{phone,jdbcType=VARCHAR},
+      wecahat = #{wecahat,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      conuttime = #{conuttime,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      vipstate = #{vipstate,jdbcType=INTEGER},
+      viptime = #{viptime,jdbcType=VARCHAR},
+      headurl = #{headurl,jdbcType=VARCHAR}
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.MusicMapper">
+  <resultMap id="BaseResultMap" type="com.qf.pojo.Music">
+    <id column="mid" jdbcType="INTEGER" property="mid" />
+    <result column="mname" jdbcType="VARCHAR" property="mname" />
+    <result column="mtitle" jdbcType="VARCHAR" property="mtitle" />
+    <result column="mcontext" jdbcType="VARCHAR" property="mcontext" />
+    <result column="mtime" jdbcType="VARCHAR" property="mtime" />
+    <result column="mtypeid" jdbcType="INTEGER" property="mtypeid" />
+    <result column="vipstate" jdbcType="INTEGER" property="vipstate" />
+    <result column="murl" jdbcType="VARCHAR" property="murl" />
+    <result column="mphoto" jdbcType="VARCHAR" property="mphoto" />
+    <result column="mcount" jdbcType="INTEGER" property="mcount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    mid, mname, mtitle, mcontext, mtime, mtypeid, vipstate, murl, mphoto, mcount
+  </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from music
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from music
+    where mid = #{mid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from music
+    where mid = #{mid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qf.pojo.Music">
+    insert into music (mid, mname, mtitle, 
+      mcontext, mtime, mtypeid, 
+      vipstate, murl, mphoto, 
+      mcount)
+    values (#{mid,jdbcType=INTEGER}, #{mname,jdbcType=VARCHAR}, #{mtitle,jdbcType=VARCHAR}, 
+      #{mcontext,jdbcType=VARCHAR}, #{mtime,jdbcType=VARCHAR}, #{mtypeid,jdbcType=INTEGER}, 
+      #{vipstate,jdbcType=INTEGER}, #{murl,jdbcType=VARCHAR}, #{mphoto,jdbcType=VARCHAR}, 
+      #{mcount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.pojo.Music">
+    insert into music
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        mid,
+      </if>
+      <if test="mname != null">
+        mname,
+      </if>
+      <if test="mtitle != null">
+        mtitle,
+      </if>
+      <if test="mcontext != null">
+        mcontext,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+      <if test="mtypeid != null">
+        mtypeid,
+      </if>
+      <if test="vipstate != null">
+        vipstate,
+      </if>
+      <if test="murl != null">
+        murl,
+      </if>
+      <if test="mphoto != null">
+        mphoto,
+      </if>
+      <if test="mcount != null">
+        mcount,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mid != null">
+        #{mid,jdbcType=INTEGER},
+      </if>
+      <if test="mname != null">
+        #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="mtitle != null">
+        #{mtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mcontext != null">
+        #{mcontext,jdbcType=VARCHAR},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=VARCHAR},
+      </if>
+      <if test="mtypeid != null">
+        #{mtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="vipstate != null">
+        #{vipstate,jdbcType=INTEGER},
+      </if>
+      <if test="murl != null">
+        #{murl,jdbcType=VARCHAR},
+      </if>
+      <if test="mphoto != null">
+        #{mphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="mcount != null">
+        #{mcount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.pojo.Music">
+    update music
+    <set>
+      <if test="mname != null">
+        mname = #{mname,jdbcType=VARCHAR},
+      </if>
+      <if test="mtitle != null">
+        mtitle = #{mtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mcontext != null">
+        mcontext = #{mcontext,jdbcType=VARCHAR},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=VARCHAR},
+      </if>
+      <if test="mtypeid != null">
+        mtypeid = #{mtypeid,jdbcType=INTEGER},
+      </if>
+      <if test="vipstate != null">
+        vipstate = #{vipstate,jdbcType=INTEGER},
+      </if>
+      <if test="murl != null">
+        murl = #{murl,jdbcType=VARCHAR},
+      </if>
+      <if test="mphoto != null">
+        mphoto = #{mphoto,jdbcType=VARCHAR},
+      </if>
+      <if test="mcount != null">
+        mcount = #{mcount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.pojo.Music">
+    update music
+    set mname = #{mname,jdbcType=VARCHAR},
+      mtitle = #{mtitle,jdbcType=VARCHAR},
+      mcontext = #{mcontext,jdbcType=VARCHAR},
+      mtime = #{mtime,jdbcType=VARCHAR},
+      mtypeid = #{mtypeid,jdbcType=INTEGER},
+      vipstate = #{vipstate,jdbcType=INTEGER},
+      murl = #{murl,jdbcType=VARCHAR},
+      mphoto = #{mphoto,jdbcType=VARCHAR},
+      mcount = #{mcount,jdbcType=INTEGER}
+    where mid = #{mid,jdbcType=INTEGER}
+  </update>
+</mapper>

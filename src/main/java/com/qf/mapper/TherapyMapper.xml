@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.mapper.TherapyMapper">
+  <resultMap id="BaseResultMap" type="com.qf.pojo.Therapy">
+    <id column="theid" jdbcType="INTEGER" property="theid" />
+    <result column="thename" jdbcType="VARCHAR" property="thename" />
+    <result column="thephoto" jdbcType="VARCHAR" property="thephoto" />
+    <result column="mtypeid" jdbcType="INTEGER" property="mtypeid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    theid, thename, thephoto, mtypeid
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from therapy
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from therapy
+    where theid = #{theid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from therapy
+    where theid = #{theid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qf.pojo.Therapy">
+    insert into therapy (theid, thename, thephoto, 
+      mtypeid)
+    values (#{theid,jdbcType=INTEGER}, #{thename,jdbcType=VARCHAR}, #{thephoto,jdbcType=VARCHAR}, 
+      #{mtypeid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qf.pojo.Therapy">
+    insert into therapy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="theid != null">
+        theid,
+      </if>
+      <if test="thename != null">
+        thename,
+      </if>
+      <if test="thephoto != null">
+        thephoto,
+      </if>
+      <if test="mtypeid != null">
+        mtypeid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="theid != null">
+        #{theid,jdbcType=INTEGER},
+      </if>
+      <if test="thename != null">
+        #{thename,jdbcType=VARCHAR},
+      </if>
+      <if test="thephoto != null">
+        #{thephoto,jdbcType=VARCHAR},
+      </if>
+      <if test="mtypeid != null">
+        #{mtypeid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qf.pojo.Therapy">
+    update therapy
+    <set>
+      <if test="thename != null">
+        thename = #{thename,jdbcType=VARCHAR},
+      </if>
+      <if test="thephoto != null">
+        thephoto = #{thephoto,jdbcType=VARCHAR},
+      </if>
+      <if test="mtypeid != null">
+        mtypeid = #{mtypeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where theid = #{theid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qf.pojo.Therapy">
+    update therapy
+    set thename = #{thename,jdbcType=VARCHAR},
+      thephoto = #{thephoto,jdbcType=VARCHAR},
+      mtypeid = #{mtypeid,jdbcType=INTEGER}
+    where theid = #{theid,jdbcType=INTEGER}
+  </update>
+</mapper>
